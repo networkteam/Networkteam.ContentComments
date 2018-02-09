@@ -258,22 +258,26 @@ var CommentView = function CommentView(_ref) {
 
     return _react2.default.createElement(
         'div',
-        { className: 'neos-single-comment' },
+        { style: { backgroundColor: noteIndex % 2 == 0 ? 'rgba(255, 255, 255, 0.2)' : 'transparent', paddingLeft: 5, paddingRight: 5, paddingTop: 5, paddingBottom: 18 } },
         _react2.default.createElement(
             'header',
             null,
             _react2.default.createElement(
                 'span',
-                null,
+                { style: { fontStyle: 'italic', fontSize: 12, verticalAlign: 'middle' } },
                 new Date(note.date).toISOString().slice(0, 16).replace('T', ' '),
                 ': ',
                 note.user
             ),
-            _react2.default.createElement(_reactUiComponents.IconButton, { icon: 'trash', className: 'neos-delete-comment', onClick: deleteNote(noteIndex) })
+            _react2.default.createElement(
+                'span',
+                { style: { float: 'right' } },
+                _react2.default.createElement(_reactUiComponents.IconButton, { icon: 'trash', hoverStyle: 'warn', onClick: deleteNote(noteIndex) })
+            )
         ),
         _react2.default.createElement(
             'div',
-            { className: 'neos-comment-text' },
+            null,
             note.comment
         )
     );
@@ -310,11 +314,19 @@ var ContentCommentEditor = (_temp = _class = function (_PureComponent) {
                 this.state.notes.map(function (note, index) {
                     return _react2.default.createElement(CommentView, { note: note, key: index, noteIndex: index, deleteNote: _this2.deleteNote });
                 }),
-                _react2.default.createElement(_reactUiComponents.TextArea, { onChange: this.newNoteFieldChange, value: this.state.newNote }),
                 _react2.default.createElement(
-                    _reactUiComponents.Button,
-                    { onClick: this.addNewNote },
-                    'Add comment'
+                    'div',
+                    { style: { marginTop: 20 } },
+                    _react2.default.createElement(_reactUiComponents.TextArea, { onChange: this.newNoteFieldChange, value: this.state.newNote })
+                ),
+                _react2.default.createElement(
+                    'div',
+                    { style: { marginTop: 15 } },
+                    _react2.default.createElement(
+                        _reactUiComponents.Button,
+                        { onClick: this.addNewNote },
+                        'Add comment'
+                    )
                 )
             );
         }

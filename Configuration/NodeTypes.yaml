@@ -15,7 +15,6 @@
     comments:
       type: 'string'
       ui:
-        label: 'New Comment'
         inspector:
           group: 'comments'
           editor: 'Neos.Neos.UI.NetworkteamContentComments:CommentEditor'

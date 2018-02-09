@@ -5,14 +5,16 @@ import {$set, $get} from 'plow-js';
 
 
 const CommentView = ({note, deleteNote, noteIndex}) => {
-    return (<div className="neos-single-comment">
+    return (<div style={{backgroundColor: noteIndex % 2 == 0 ? 'rgba(255, 255, 255, 0.2)' : 'transparent', paddingLeft: 5, paddingRight: 5,paddingTop: 5, paddingBottom: 18}}>
         <header>
-            <span>
+            <span style={{fontStyle: 'italic', fontSize: 12, verticalAlign: 'middle'}}>
                 {new Date(note.date).toISOString().slice(0, 16).replace('T', ' ')}: {note.user}
             </span>
-            <IconButton icon="trash" className="neos-delete-comment" onClick={deleteNote(noteIndex)} />
+            <span style={{float: 'right'}}>
+              <IconButton icon="trash" hoverStyle="warn" onClick={deleteNote(noteIndex)} />
+            </span>
         </header>
-        <div className="neos-comment-text">
+        <div>
             {note.comment}
         </div>
     </div>)
@@ -49,7 +51,7 @@ class ContentCommentEditor extends PureComponent {
         if (!this.state.newNote) {
             return
         }
-        
+
         let comment = {
             date: new Date(),
             comment: this.state.newNote,
@@ -74,12 +76,18 @@ class ContentCommentEditor extends PureComponent {
 
     render() {
         console.log(this.props)
-        return (<div className="comments-editor">{this.state.notes.map((note, index) => (
-            <CommentView note={note} key={index} noteIndex={index} deleteNote={this.deleteNote}/>
-        ))}
-        <TextArea onChange={this.newNoteFieldChange} value={this.state.newNote}/>
-            <Button onClick={this.addNewNote}>Add comment</Button>
-        </div>);
+        return (
+          <div className="comments-editor">
+            {this.state.notes.map((note, index) => (
+              <CommentView note={note} key={index} noteIndex={index} deleteNote={this.deleteNote}/>
+            ))}
+            <div style={{marginTop: 20}}>
+              <TextArea onChange={this.newNoteFieldChange} value={this.state.newNote}/>
+            </div>
+            <div style={{marginTop: 15}}>
+              <Button onClick={this.addNewNote}>Add comment</Button>
+            </div>
+          </div>);
     }
 
 }
