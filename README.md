@@ -1,13 +1,13 @@
-# Sandstorm.ContentComments
+# Networkteam.ContentComments
 
-Created by Sandstorm Media in 2015.
+Created originally by Sandstorm Media in 2015.
+Updated and forked for new NeosUI by networkteam in 2018
 
-This Package Adds Content Comments / Sticky Notes to TYPO3 Neos. You can comment on arbitrary nodes.
+This Package Adds Content Comments / Sticky Notes to Neos. You can comment on arbitrary nodes.
 
 Supported Neos Versions:
 
-- Neos 1.2.*
-- Neos 2.0.*
+- Neos 3.3.*
 - Neos Master
 
 ## Usage
@@ -19,8 +19,6 @@ Supported Neos Versions:
 
 * the "comments" tab is added to all node types, alongside with the property `comments`. (API)
 * The `comments` property is a JSON-encoded array with comment objects which is manipulated by a custom `Comments` editor. (API)
-* A `CommentingContentModuleExtension` displays the commenting indicators as overlays on the current page (non-API)
-* JS and CSS extensions are added using TypoScript to the page rendering.
 * A `WorkspaceAspect` takes care of merging comments together on publishing (non-API)
 
 
@@ -42,7 +40,7 @@ workspace and shine-through logic.
 
 ## TODOs
 
-This is currently beta quality; expect to find bugs. 
+This is currently beta quality; expect to find bugs. Still valid.
 
 ## License
 

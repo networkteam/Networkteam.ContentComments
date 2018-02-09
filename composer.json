@@ -1,6 +1,6 @@
 {
-    "name": "sandstorm/contentcomments",
-    "type": "typo3-flow-package",
+    "name": "networkteam/contentcomments",
+    "type": "neos-flow-package",
     "description": "A Neos package to add content comments to any node (as communication medium)",
     "keywords": [
         "neoscms",
@@ -18,21 +18,26 @@
             "role": "Developer"
         },
         {
-            "name": "Michael Berhorst",
-            "homepage": "http://sandstorm-media.de",
+            "name": "Sebastian Flor",
+            "homepage": "http://networkteam.com",
+            "role": "Developer"
+        },
+        {
+            "name": "Sören Rohweder",
+            "homepage": "http://networkteam.com",
             "role": "Developer"
         }
     ],
     "support": {
-        "issues": "https://github.com/sandstorm/ContentComments/issues",
-        "source": "https://github.com/sandstorm/ContentComments"
+        "issues": "https://github.com/networkteam/ContentComments/issues",
+        "source": "https://github.com/networkteam/ContentComments"
     },
     "require": {
-        "typo3/neos": ">=1.2"
+        "neos/neos": ">=3.3"
     },
     "autoload": {
-        "psr-0": {
-            "Sandstorm\\ContentComments": "Classes"
+        "psr-4": {
+            "Networkteam\\ContentComments": "Classes"
         }
     },
     "extra": {

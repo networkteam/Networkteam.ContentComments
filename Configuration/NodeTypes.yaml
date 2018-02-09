@@ -18,4 +18,4 @@
         label: 'New Comment'
         inspector:
           group: 'comments'
-          editor: 'Sandstorm.ContentComments/CommentsEditor'
+          editor: 'Neos.Neos.UI.NetworkteamContentComments:CommentEditor'

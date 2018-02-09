@@ -1,5 +1,5 @@
 <?php
-namespace Sandstorm\ContentComments\Aspects;
+namespace Networkteam\ContentComments\Aspects;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Flow\Aop\JoinPointInterface;
@@ -77,11 +77,11 @@ class WorkspaceAspect {
 	protected function mergeComments($first, $second) {
 		$result = [];
 		foreach ($first as $value) {
-			$result[$value['date'] . $value['user']] = $value;
+			$result[$value['date'] . $value['user'] ?? ''] = $value;
 		}
 
 		foreach ($second as $value) {
-			$result[$value['date'] . $value['user']] = $value;
+			$result[$value['date'] . $value['user'] ?? ''] = $value;
 		}
 
 		ksort($result);

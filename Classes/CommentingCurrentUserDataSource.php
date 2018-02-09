@@ -1,12 +1,5 @@
 <?php
-/**
- * Created by IntelliJ IDEA.
- * User: sebastian
- * Date: 18.05.15
- * Time: 07:16
- */
-
-namespace Sandstorm\ContentComments;
+namespace Networkteam\ContentComments;
 
 use Neos\Flow\Annotations as Flow;
 use Neos\Neos\Service\DataSource\AbstractDataSource;
