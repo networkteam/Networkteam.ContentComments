@@ -1,6 +1,6 @@
 {
     "name": "networkteam/contentcomments",
-    "type": "neos-flow-package",
+    "type": "neos-package",
     "description": "A Neos package to add content comments to any node (as communication medium)",
     "keywords": [
         "neoscms",
