@@ -229,8 +229,6 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _class, _temp, _initialiseProps;
-
 var _react = __webpack_require__(8);
 
 var _react2 = _interopRequireDefault(_react);
@@ -283,7 +281,7 @@ var CommentView = function CommentView(_ref) {
     );
 };
 
-var ContentCommentEditor = (_temp = _class = function (_PureComponent) {
+var ContentCommentEditor = function (_PureComponent) {
     _inherits(ContentCommentEditor, _PureComponent);
 
     function ContentCommentEditor(props) {
@@ -291,9 +289,43 @@ var ContentCommentEditor = (_temp = _class = function (_PureComponent) {
 
         var _this = _possibleConstructorReturn(this, (ContentCommentEditor.__proto__ || Object.getPrototypeOf(ContentCommentEditor)).call(this, props));
 
-        _initialiseProps.call(_this);
+        _this.addComment = function (comment) {
+            var newArray = [].concat(_toConsumableArray(_this.state.notes), [comment]);
 
-        var notes = JSON.parse(props.value);
+            _this.props.commit(JSON.stringify(newArray));
+            _this.setState({ notes: newArray, newNote: '' });
+        };
+
+        _this.addNewNote = function () {
+            if (!_this.state.newNote) {
+                return;
+            }
+
+            var comment = {
+                date: new Date(),
+                comment: _this.state.newNote,
+                user: _this.props.userName
+            };
+
+            _this.addComment(comment);
+        };
+
+        _this.deleteNote = function (index) {
+            return function () {
+                var currentNotes = _this.state.notes;
+                currentNotes.splice(index, 1);
+                _this.props.commit(JSON.stringify(currentNotes));
+                _this.setState({ notes: currentNotes });
+            };
+        };
+
+        _this.newNoteFieldChange = function (value) {
+            _this.setState({
+                newNote: value
+            });
+        };
+
+        var notes = props.value && JSON.parse(props.value);
 
         _this.state = {
             notes: notes,
@@ -307,11 +339,10 @@ var ContentCommentEditor = (_temp = _class = function (_PureComponent) {
         value: function render() {
             var _this2 = this;
 
-            console.log(this.props);
             return _react2.default.createElement(
                 'div',
                 { className: 'comments-editor' },
-                this.state.notes.map(function (note, index) {
+                this.state.notes && this.state.notes.map(function (note, index) {
                     return _react2.default.createElement(CommentView, { note: note, key: index, noteIndex: index, deleteNote: _this2.deleteNote });
                 }),
                 _react2.default.createElement(
@@ -333,51 +364,7 @@ var ContentCommentEditor = (_temp = _class = function (_PureComponent) {
     }]);
 
     return ContentCommentEditor;
-}(_react.PureComponent), _initialiseProps = function _initialiseProps() {
-    var _this3 = this;
-
-    this.updateComments = function (value) {
-        var notes = JSON.parse(value);
-        _this3.setState({ notes: notes });
-    };
-
-    this.addComment = function (comment) {
-        var newArray = [].concat(_toConsumableArray(_this3.state.notes), [comment]);
-
-        _this3.props.commit(JSON.stringify(newArray));
-        _this3.setState({ notes: newArray, newNote: '' });
-    };
-
-    this.addNewNote = function () {
-        if (!_this3.state.newNote) {
-            return;
-        }
-
-        var comment = {
-            date: new Date(),
-            comment: _this3.state.newNote,
-            user: _this3.props.userName
-        };
-
-        _this3.addComment(comment);
-    };
-
-    this.deleteNote = function (index) {
-        return function () {
-            var currentNotes = _this3.state.notes;
-            currentNotes.splice(index, 1);
-            _this3.props.commit(JSON.stringify(currentNotes));
-            _this3.setState({ notes: currentNotes });
-        };
-    };
-
-    this.newNoteFieldChange = function (value) {
-        _this3.setState({
-            newNote: value
-        });
-    };
-}, _temp);
-
+}(_react.PureComponent);
 
 var mapStateToProps = function mapStateToProps(state) {
     return {

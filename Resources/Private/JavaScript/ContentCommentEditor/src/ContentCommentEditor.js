@@ -25,17 +25,12 @@ class ContentCommentEditor extends PureComponent {
     constructor(props) {
         super(props);
 
-        const notes = JSON.parse(props.value);
+        const notes = props.value && JSON.parse(props.value);
 
         this.state = {
             notes,
             newNote: ''
         }
-    }
-
-    updateComments = (value) => {
-        const notes = JSON.parse(value)
-        this.setState({notes})
     }
 
     addComment = comment => {
@@ -75,10 +70,9 @@ class ContentCommentEditor extends PureComponent {
     }
 
     render() {
-        console.log(this.props)
         return (
           <div className="comments-editor">
-            {this.state.notes.map((note, index) => (
+            {this.state.notes && this.state.notes.map((note, index) => (
               <CommentView note={note} key={index} noteIndex={index} deleteNote={this.deleteNote}/>
             ))}
             <div style={{marginTop: 20}}>
