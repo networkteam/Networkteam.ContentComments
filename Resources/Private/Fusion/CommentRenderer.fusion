@@ -35,6 +35,7 @@ prototype(Networkteam.ContentComment:CommentRenderer) < prototype(Neos.Fusion:Va
                 omitClosingTag = false
                 attributes {
                     class="content-comments__comment-item"
+                    style = ${'border-left: 3px solid ' + item.userColor}
                 }
                 content = Neos.Fusion:Array {
                     commentHeader = Neos.Fusion:Tag {
