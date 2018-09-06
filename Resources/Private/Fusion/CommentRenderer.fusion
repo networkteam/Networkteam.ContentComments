@@ -50,7 +50,7 @@ prototype(Networkteam.ContentComment:CommentRenderer) < prototype(Neos.Fusion:Va
                                 attributes {
                                     class = "content-comments__comment-item-date"
                                 }
-                                content = ${Date.format(Date.parse(item.date, 'Y-m-d\TH:i:s.uP'), 'd.m.Y H:s')}
+                                content = ${Date.format(Date.parse(item.date, 'Y-m-d\TH:i:s.uP'), 'd.m.Y H:i:s')}
                             }
 
                             author = Neos.Fusion:Tag {
