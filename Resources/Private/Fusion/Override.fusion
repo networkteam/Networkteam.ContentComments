@@ -1,10 +1,10 @@
 # Extend content elements to comment rendering
 prototype(Neos.Neos:Content) {
-    @process.showCommentIcon = Networkteam.ContentComment:CommentRenderer
+    @process.showCommentIcon = Networkteam.ContentComments:CommentRenderer
 }
 
 prototype(Neos.Neos:ContentComponent) {
-    @process.showCommentIcon = Networkteam.ContentComment:CommentRenderer
+    @process.showCommentIcon = Networkteam.ContentComments:CommentRenderer
 }
 
 prototype(Neos.Neos:Page) {
@@ -12,12 +12,12 @@ prototype(Neos.Neos:Page) {
         stylesheets {
             contentComments = Neos.Fusion:Tag {
                 tagName = 'link'
-				attributes {
-					href = Neos.Fusion:ResourceUri {
-						path = 'resource://Networkteam.ContentComments/Public/css/contentComments.css'
-					}
-					rel = 'stylesheet'
-				}
+                attributes {
+                    href = Neos.Fusion:ResourceUri {
+                        path = 'resource://Networkteam.ContentComments/Public/css/contentComments.css'
+                    }
+                    rel = 'stylesheet'
+                }
             }
         }
     }

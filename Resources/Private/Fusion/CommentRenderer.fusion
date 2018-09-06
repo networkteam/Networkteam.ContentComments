@@ -1,11 +1,10 @@
 # Add prototype to render comment in frontend mit bootstrap 3 based styles
-prototype(Networkteam.ContentComment:CommentRenderer) < prototype(Neos.Fusion:Value) {
+prototype(Networkteam.ContentComments:CommentRenderer) < prototype(Neos.Fusion:Value) {
     value = ${value}
 
     input = Neos.Fusion:Tag {
         @if.isLiveWorkspace = ${node.context.workspace.name == 'live'}
         tagName = 'input'
-        omitClosingTag = true
         attributes {
             type='checkbox'
             id = ${'c' + node.identifier}
@@ -14,7 +13,6 @@ prototype(Networkteam.ContentComment:CommentRenderer) < prototype(Neos.Fusion:Va
     }
     label = Neos.Fusion:Tag {
         tagName = 'label'
-        omitClosingTag = FALSE
         attributes {
             class = 'content-comments__trigger'
             for = ${'c' + node.identifier}
@@ -24,7 +22,6 @@ prototype(Networkteam.ContentComment:CommentRenderer) < prototype(Neos.Fusion:Va
     comments = Neos.Fusion:Tag {
         @if.isLiveWorkspace = ${node.context.workspace.name == 'live'}
         tagName = 'div'
-        omitClosingTag = false
         attributes {
             class = 'content-comments__comments-container'
         }
@@ -32,7 +29,6 @@ prototype(Networkteam.ContentComment:CommentRenderer) < prototype(Neos.Fusion:Va
             collection = ${Json.parse(q(node).property('comments'))}
             itemRenderer = Neos.Fusion:Tag {
                 tagName = 'article'
-                omitClosingTag = false
                 attributes {
                     class="content-comments__comment-item"
                     style = ${'border-left: 3px solid ' + item.userColor}
@@ -40,14 +36,12 @@ prototype(Networkteam.ContentComment:CommentRenderer) < prototype(Neos.Fusion:Va
                 content = Neos.Fusion:Array {
                     commentHeader = Neos.Fusion:Tag {
                         tagName = 'header'
-                        omitClosingTag = false
                         attributes {
                             class = "content-comments__comment-item-header"
                         }
                         content = Neos.Fusion:Array {
                             date = Neos.Fusion:Tag {
                                 tagName = 'span'
-                                omitClosingTag = false
                                 attributes {
                                     class = "content-comments__comment-item-date"
                                 }
@@ -56,7 +50,6 @@ prototype(Networkteam.ContentComment:CommentRenderer) < prototype(Neos.Fusion:Va
 
                             author = Neos.Fusion:Tag {
                                 tagName = 'span'
-                                omitClosingTag = false
                                 attributes {
                                     class = "content-comments__comment-item-author"
                                 }
@@ -66,7 +59,6 @@ prototype(Networkteam.ContentComment:CommentRenderer) < prototype(Neos.Fusion:Va
                     }
                     comment = Neos.Fusion:Tag {
                         tagName = 'div'
-                        omitClosingTag = false
                         attributes {
                             class = "content-comments__comment-item-comment"
                         }
@@ -77,7 +69,7 @@ prototype(Networkteam.ContentComment:CommentRenderer) < prototype(Neos.Fusion:Va
         }
     }
     @process.wrapper {
-		expression = ${'<div class="content-comments">' + this.input + this.comments + this.label + value + '</div>'}
+        expression = ${'<div class="content-comments">' + this.input + this.comments + this.label + value + '</div>'}
         @position = 'start'
     }
 
