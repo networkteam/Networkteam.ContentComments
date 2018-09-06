@@ -4,8 +4,8 @@
     "watch": "neos-react-scripts watch"
   },
   "devDependencies": {
-    "@neos-project/neos-ui-extensibility": "1.0.4",
-    "@neos-project/react-ui-components": "1.0.4"
+    "@neos-project/neos-ui-extensibility": "*",
+    "@neos-project/react-ui-components": "*"
   },
   "neos": {
     "buildTargetDirectory": "../../../Public/JavaScript"

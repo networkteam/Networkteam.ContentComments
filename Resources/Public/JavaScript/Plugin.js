@@ -192,7 +192,7 @@ function createConsumerApi(manifests, exposureMap) {
 /* 5 */
 /***/ (function(module, exports) {
 
-module.exports = {"name":"@neos-project/neos-ui-extensibility","version":"1.0.4","description":"Extensibility mechanisms for the Neos CMS UI","main":"./src/index.js","scripts":{"prebuild":"check-dependencies && yarn clean","test":"yarn jest -- -w 2 --coverage","test:watch":"yarn jest -- --watch","build":"exit 0","build:watch":"exit 0","clean":"rimraf ./lib ./dist","lint":"eslint src","jest":"NODE_ENV=test jest"},"devDependencies":{"@neos-project/babel-preset-neos-ui":"1.0.4","@neos-project/jest-preset-neos-ui":"1.0.4"},"dependencies":{"@neos-project/build-essentials":"1.0.4","@neos-project/positional-array-sorter":"1.0.4","babel-core":"^6.13.2","babel-eslint":"^7.1.1","babel-loader":"^7.1.2","babel-plugin-transform-decorators-legacy":"^1.3.4","babel-plugin-transform-object-rest-spread":"^6.20.1","babel-plugin-webpack-alias":"^2.1.1","babel-preset-es2015":"^6.13.2","babel-preset-react":"^6.3.13","babel-preset-stage-0":"^6.3.13","chalk":"^1.1.3","css-loader":"^0.28.4","file-loader":"^1.1.5","json-loader":"^0.5.4","postcss-loader":"^2.0.8","react-dev-utils":"^0.5.0","style-loader":"^0.19.0"},"bin":{"neos-react-scripts":"./bin/neos-react-scripts.js"},"jest":{"preset":"@neos-project/jest-preset-neos-ui"}}
+module.exports = {"name":"@neos-project/neos-ui-extensibility","version":"1.3.3","description":"Extensibility mechanisms for the Neos CMS UI","main":"./src/index.js","scripts":{"prebuild":"check-dependencies && yarn clean","test":"yarn jest -- -w 2 --coverage","test:watch":"yarn jest -- --watch","build":"exit 0","build:watch":"exit 0","clean":"rimraf ./lib ./dist","lint":"eslint src","jest":"NODE_ENV=test jest"},"devDependencies":{"@neos-project/babel-preset-neos-ui":"1.3.3","@neos-project/jest-preset-neos-ui":"1.3.3"},"dependencies":{"@neos-project/build-essentials":"1.3.3","@neos-project/positional-array-sorter":"1.3.3","babel-core":"^6.13.2","babel-eslint":"^7.1.1","babel-loader":"^7.1.2","babel-plugin-transform-decorators-legacy":"^1.3.4","babel-plugin-transform-object-rest-spread":"^6.20.1","babel-plugin-webpack-alias":"^2.1.1","babel-preset-es2015":"^6.13.2","babel-preset-react":"^6.3.13","babel-preset-stage-0":"^6.3.13","chalk":"^1.1.3","css-loader":"^0.28.4","file-loader":"^1.1.5","json-loader":"^0.5.4","postcss-loader":"^2.0.10","react-dev-utils":"^0.5.0","style-loader":"^0.21.0"},"bin":{"neos-react-scripts":"./bin/neos-react-scripts.js"},"jest":{"preset":"@neos-project/jest-preset-neos-ui"}}
 
 /***/ }),
 /* 6 */
@@ -208,7 +208,7 @@ Object.defineProperty(exports, "__esModule", {
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 exports.default = function (manifests) {
-    return function manifest(identifier, options, bootstrap) {
+    return function (identifier, options, bootstrap) {
         manifests.push(_defineProperty({}, identifier, {
             options: options,
             bootstrap: bootstrap
@@ -226,6 +226,8 @@ exports.default = function (manifests) {
 Object.defineProperty(exports, "__esModule", {
     value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -249,14 +251,41 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function stringToColor(baseString) {
+    var color = '#';
+    var hash = 0;
+
+    for (var i = 0; i < baseString.length; i++) {
+        hash = baseString.charCodeAt(i) + ((hash << 5) - hash);
+    }
+
+    for (var _i = 0; _i < 3; _i++) {
+        var value = hash >> _i * 8 & 0xFF;
+        color += ('00' + value.toString(16)).substr(-2);
+    }
+    return color;
+}
+
 var CommentView = function CommentView(_ref) {
     var note = _ref.note,
         deleteNote = _ref.deleteNote,
+        updateNote = _ref.updateNote,
         noteIndex = _ref.noteIndex;
+
+    var borderColor = note.userColor || stringToColor(note.user) || '#000';
 
     return _react2.default.createElement(
         'div',
-        { style: { backgroundColor: noteIndex % 2 == 0 ? 'rgba(255, 255, 255, 0.2)' : 'transparent', paddingLeft: 5, paddingRight: 5, paddingTop: 5, paddingBottom: 18 } },
+        { style: {
+                backgroundColor: noteIndex % 2 == 0 ? 'rgba(255, 255, 255, 0.2)' : 'transparent',
+                paddingLeft: 5,
+                paddingRight: 5,
+                paddingTop: 5,
+                paddingBottom: 18,
+                borderLeftWidth: 5,
+                borderLeftColor: borderColor,
+                borderLeftStyle: 'solid'
+            } },
         _react2.default.createElement(
             'header',
             null,
@@ -304,10 +333,20 @@ var ContentCommentEditor = function (_PureComponent) {
             var comment = {
                 date: new Date(),
                 comment: _this.state.newNote,
-                user: _this.props.userName
+                user: _this.props.userName,
+                userColor: stringToColor(_this.props.userName)
             };
 
             _this.addComment(comment);
+        };
+
+        _this.updateNote = function (index, newValues) {
+            var currentNotes = _this.state.notes;
+            var editedNote = _extends({}, currentNotes[index], newValues);
+
+            currentNotes[index] = editedNote;
+            _this.props.commit(JSON.stringify(currentNotes));
+            _this.setState({ notes: currentNotes });
         };
 
         _this.deleteNote = function (index) {
@@ -334,6 +373,10 @@ var ContentCommentEditor = function (_PureComponent) {
         return _this;
     }
 
+    // I thought about updating every comment, if it has no color but skipped it.
+    // This function might be useful in the future though
+
+
     _createClass(ContentCommentEditor, [{
         key: 'render',
         value: function render() {
@@ -343,7 +386,7 @@ var ContentCommentEditor = function (_PureComponent) {
                 'div',
                 { className: 'comments-editor' },
                 this.state.notes && this.state.notes.map(function (note, index) {
-                    return _react2.default.createElement(CommentView, { note: note, key: index, noteIndex: index, deleteNote: _this2.deleteNote });
+                    return _react2.default.createElement(CommentView, { note: note, key: index, noteIndex: index, deleteNote: _this2.deleteNote, updateNote: _this2.updateNote });
                 }),
                 _react2.default.createElement(
                     'div',
