@@ -6,3 +6,19 @@ prototype(Neos.Neos:Content) {
 prototype(Neos.Neos:ContentComponent) {
     @process.showCommentIcon = Networkteam.ContentComment:CommentRenderer
 }
+
+prototype(Neos.Neos:Page) {
+    head {
+        stylesheets {
+            contentComments = Neos.Fusion:Tag {
+                tagName = 'link'
+				attributes {
+					href = Neos.Fusion:ResourceUri {
+						path = 'resource://Networkteam.ContentComments/Public/css/contentComments.css'
+					}
+					rel = 'stylesheet'
+				}
+            }
+        }
+    }
+}

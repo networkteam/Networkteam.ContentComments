@@ -1,0 +1,24 @@
+{
+  "name": "networkteam.contentcomments",
+  "version": "1.0.0",
+  "description": "A Neos package providing basic comment functionality",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "node-sass": "^4.9.3"
+  },
+  "scripts": {
+    "build": "node_modules/node-sass/bin/node-sass --output-style compressed Resources/Private/Scss/contentComments.scss > Resources/Public/Css/contentComments.css",
+    "start": "node_modules/node-sass/bin/node-sass --watch Resources/Private/Scss -o Resources/Public/Css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/networkteam/Networkteam.ContentComments.git"
+  },
+  "author": "networkteam GmbH",
+  "license": "GPL-3.0+",
+  "bugs": {
+    "url": "https://github.com/networkteam/Networkteam.ContentComments/issues"
+  },
+  "homepage": "https://github.com/networkteam/Networkteam.ContentComments#readme"
+}
