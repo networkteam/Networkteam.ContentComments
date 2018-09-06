@@ -16,7 +16,7 @@ Supported Neos Versions:
 * use the new "Comments" Tab in the Inspector
 * use the setting ShowInFrontend to render comments in frontend
   * Networkteam.ContentComments.ShowInFrontend: true`
-  * use the scss parcial "contentComment" in your css rendering to show comments in a nice tooltip
+  * use the scss partial "contentComment" in your css rendering to show comments in a nice tooltip
   * there's only a icon rendered in the backend
 
 ## Internal Working
