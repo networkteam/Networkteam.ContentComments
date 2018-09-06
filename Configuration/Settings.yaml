@@ -1,4 +1,3 @@
-
 Neos:
   Neos:
     Ui:
@@ -6,3 +5,10 @@ Neos:
         javascript:
           'Neos.Neos.UI.NetworkteamContentComments:CommentEditor':
             resource: resource://Networkteam.ContentComments/Public/JavaScript/Plugin.js
+    fusion:
+      autoInclude:
+        Networkteam.ContentComments: true
+
+Networkteam:
+  ContentComments:
+    ShowInFrontend: false

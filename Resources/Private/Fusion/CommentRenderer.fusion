@@ -1,0 +1,85 @@
+# Add prototype to render comment in frontend mit bootstrap 3 based styles
+prototype(Networkteam.ContentComment:CommentRenderer) < prototype(Neos.Fusion:Value) {
+    value = ${value}
+
+    input = Neos.Fusion:Tag {
+        @if.isLiveWorkspace = ${node.context.workspace.name == 'live'}
+        tagName = 'input'
+        omitClosingTag = true
+        attributes {
+            type='checkbox'
+            id = ${'c' + node.identifier}
+            class="content-comments__state"
+        }
+    }
+    label = Neos.Fusion:Tag {
+        tagName = 'label'
+        omitClosingTag = FALSE
+        attributes {
+            class = 'content-comments__trigger'
+            for = ${'c' + node.identifier}
+        }
+        content = 'i'
+    }
+    comments = Neos.Fusion:Tag {
+        @if.isLiveWorkspace = ${node.context.workspace.name == 'live'}
+        tagName = 'div'
+        omitClosingTag = false
+        attributes {
+            class = 'content-comments__comments-container'
+        }
+        content = Neos.Fusion:Collection {
+            collection = ${Json.parse(q(node).property('comments'))}
+            itemRenderer = Neos.Fusion:Tag {
+                tagName = 'article'
+                omitClosingTag = false
+                attributes {
+                    class="content-comments__comment-item"
+                }
+                content = Neos.Fusion:Array {
+                    commentHeader = Neos.Fusion:Tag {
+                        tagName = 'header'
+                        omitClosingTag = false
+                        attributes {
+                            class = "content-comments__comment-item-header"
+                        }
+                        content = Neos.Fusion:Array {
+                            date = Neos.Fusion:Tag {
+                                tagName = 'span'
+                                omitClosingTag = false
+                                attributes {
+                                    class = "content-comments__comment-item-date"
+                                }
+                                content = ${Date.format(Date.parse(item.date, 'Y-m-d\TH:i:s.uP'), 'd.m.Y H:s')}
+                            }
+
+                            author = Neos.Fusion:Tag {
+                                tagName = 'span'
+                                omitClosingTag = false
+                                attributes {
+                                    class = "content-comments__comment-item-author"
+                                }
+                                content = ${' von ' + item.user}
+                            }
+                        }
+                    }
+                    comment = Neos.Fusion:Tag {
+                        tagName = 'div'
+                        omitClosingTag = false
+                        attributes {
+                            class = "content-comments__comment-item-comment"
+                        }
+                        content = ${String.pregReplace(item.comment, '/\n|\r/', '<br/>')}
+                    }
+                }
+            }
+        }
+    }
+    @process.wrapper {
+		expression = ${'<div class="content-comments">' + this.input + this.comments + this.label + value + '</div>'}
+        @position = 'start'
+    }
+
+    @if.showInFrontendisSet = ${Configuration.setting('Networkteam.ContentComments.ShowInFrontend') == true ? true : false}
+    @if.commentsAvailable = ${q(node).property('comments')}
+}

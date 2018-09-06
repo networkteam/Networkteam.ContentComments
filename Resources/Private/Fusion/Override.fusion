@@ -1,0 +1,8 @@
+# Extend content elements to comment rendering
+prototype(Neos.Neos:Content) {
+    @process.showCommentIcon = Networkteam.ContentComment:CommentRenderer
+}
+
+prototype(Neos.Neos:ContentComponent) {
+    @process.showCommentIcon = Networkteam.ContentComment:CommentRenderer
+}
