@@ -84,6 +84,12 @@ class WorkspaceAspect {
 			$result[$value['date'] . $value['user'] ?? ''] = $value;
 		}
 
+		foreach ($result as $key => $value) {
+			if (key_exists('deleted', $value)) {
+				unset($result[$key]);
+			}
+		}
+
 		ksort($result);
 		return array_values($result);
 	}
