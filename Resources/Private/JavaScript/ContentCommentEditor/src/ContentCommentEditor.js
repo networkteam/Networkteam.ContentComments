@@ -3,7 +3,7 @@ import {Button, IconButton, TextArea} from "@neos-project/react-ui-components";
 import {connect} from 'react-redux';
 import {$set, $get} from 'plow-js';
 
-function stringToColor(baseString) {
+function stringToColor(baseString = '') {
     let color = '#';
     let hash = 0;
 
@@ -97,8 +97,9 @@ class ContentCommentEditor extends PureComponent {
     }
 
     deleteNote = (index) => () => {
-        let currentNotes = this.state.notes
+        let currentNotes = this.state.notes;
         currentNotes.splice(index, 1);
+        this.updateNote(index, {deleted: true})
         this.props.commit(JSON.stringify(currentNotes))
         this.setState({notes: currentNotes})
     }
