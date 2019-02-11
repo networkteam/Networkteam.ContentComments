@@ -52,7 +52,6 @@ class ContentCommentEditor extends PureComponent {
 
     constructor(props) {
         super(props);
-
         const notes = props.value && JSON.parse(props.value);
 
         this.state = {
@@ -96,12 +95,8 @@ class ContentCommentEditor extends PureComponent {
         this.setState({notes: currentNotes});
     }
 
-    deleteNote = (index) => () => {
-        let currentNotes = this.state.notes;
-        currentNotes.splice(index, 1);
+    deleteNote = index => () => {
         this.updateNote(index, {deleted: true})
-        this.props.commit(JSON.stringify(currentNotes))
-        this.setState({notes: currentNotes})
     }
 
     newNoteFieldChange = (value) => {
@@ -112,9 +107,10 @@ class ContentCommentEditor extends PureComponent {
 
     render() {
         return (
+            // todo improve styling via css and selectors to respect deleted notes and indices
           <div className="comments-editor">
             {this.state.notes && this.state.notes.map((note, index) => (
-              <CommentView note={note} key={index} noteIndex={index} deleteNote={this.deleteNote} updateNote={this.updateNote}/>
+              !note.deleted && <CommentView note={note} key={index} noteIndex={index} deleteNote={this.deleteNote} updateNote={this.updateNote}/>
             ))}
             <div style={{marginTop: 20}}>
               <TextArea onChange={this.newNoteFieldChange} value={this.state.newNote}/>
