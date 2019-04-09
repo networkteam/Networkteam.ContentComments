@@ -14,7 +14,7 @@ prototype(Neos.Neos:Page) {
                 tagName = 'link'
                 attributes {
                     href = Neos.Fusion:ResourceUri {
-                        path = 'resource://Networkteam.ContentComments/Public/css/contentComments.css'
+                        path = 'resource://Networkteam.ContentComments/Public/Css/contentComments.css'
                     }
                     rel = 'stylesheet'
                 }
