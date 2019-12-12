@@ -33,7 +33,7 @@
         "source": "https://github.com/networkteam/ContentComments"
     },
     "require": {
-        "neos/neos": ">=3.3",
+        "neos/neos": ">=4.3",
         "neos/neos-ui": "*"
     },
     "autoload": {
