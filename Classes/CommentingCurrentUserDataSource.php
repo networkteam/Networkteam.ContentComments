@@ -25,7 +25,7 @@ class CommentingCurrentUserDataSource extends AbstractDataSource {
 	 * @return mixed JSON serializable data
 	 * @api
 	 */
-	public function getData(NodeInterface $node = NULL, array $arguments) {
+	public function getData(NodeInterface $node = NULL, array $arguments = []) {
 		return array('name' => $this->userService->getBackendUser()->getName()->getFullName());
 	}
 }

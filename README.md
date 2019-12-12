@@ -7,8 +7,10 @@ This Package Adds Content Comments / Sticky Notes to Neos. You can comment on ar
 
 Supported Neos Versions:
 
-- Neos 3.3.*
-- Neos Master
+|Neos Version|Package Version|
+|---|---|
+|>= 4.3|2.x|
+|>= 3.3, < 5.0| 1.x|
 
 ## Usage
 
