@@ -5,12 +5,16 @@ Updated and forked for new NeosUI by networkteam in 2018
 
 This Package Adds Content Comments / Sticky Notes to Neos. You can comment on arbitrary nodes.
 
-Supported Neos Versions:
+Supported Neos versions (`neos/neos`):
 
-|Neos Version|Package Version|
-|---|---|
-|>= 4.3|2.x|
-|>= 3.3, < 5.0| 1.x|
+- `4.3.*`
+- `5.*`
+- `7.*`
+
+| Neos Version | Package Version |
+|--------------|-----------------|
+| >= 4.3       | 2.x             |
+| >= 3.3, < 5.0| 1.x             |
 
 ## Usage
 
