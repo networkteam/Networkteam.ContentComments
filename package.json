@@ -5,7 +5,7 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "node-sass": "^4.13.1"
+    "node-sass": "^7.0.0"
   },
   "scripts": {
     "build": "node_modules/node-sass/bin/node-sass --output-style compressed Resources/Private/Scss/contentComments.scss > Resources/Public/Css/contentComments.css",
