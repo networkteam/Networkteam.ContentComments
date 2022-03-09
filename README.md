@@ -18,7 +18,7 @@ Supported Neos versions (`neos/neos`):
 
 ## Usage
 
-* install the package
+* install the package with `composer require networkteam/contentcomments`
 * use the new "Comments" Tab in the Inspector
 * use the setting ShowInFrontend to render comments in frontend
   * Networkteam.ContentComments.ShowInFrontend: true`
