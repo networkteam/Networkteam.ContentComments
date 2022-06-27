@@ -5,11 +5,11 @@
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
-    "node-sass": "^7.0.0"
+    "sass": "^1.53.0"
   },
   "scripts": {
-    "build": "node_modules/node-sass/bin/node-sass --output-style compressed Resources/Private/Scss/contentComments.scss > Resources/Public/Css/contentComments.css",
-    "start": "node_modules/node-sass/bin/node-sass --watch Resources/Private/Scss -o Resources/Public/Css"
+    "build": "node_modules/.bin/sass --style=compressed Resources/Private/Scss/contentComments.scss Resources/Public/Css/contentComments.css",
+    "start": "node_modules/.bin/sass --style=compressed --watch Resources/Private/Scss:Resources/Public/Css"
   },
   "repository": {
     "type": "git",
