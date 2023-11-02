@@ -11,6 +11,7 @@ prototype(Neos.Neos:Page) {
     head {
         stylesheets {
             contentComments = Neos.Fusion:Tag {
+                @if.showInFrontendisSet = ${Configuration.setting('Networkteam.ContentComments.ShowInFrontend') == true ? true : false}
                 tagName = 'link'
                 attributes {
                     href = Neos.Fusion:ResourceUri {
