@@ -74,5 +74,5 @@ prototype(Networkteam.ContentComments:CommentRenderer) < prototype(Neos.Fusion:V
     }
 
     @if.showInFrontendisSet = ${Configuration.setting('Networkteam.ContentComments.ShowInFrontend') == true ? true : false}
-    @if.commentsAvailable = ${q(node).property('comments')}
+    @if.commentsAvailable = ${q(node).property('comments') &&  q(node).property('comments') != '[]'}
 }
