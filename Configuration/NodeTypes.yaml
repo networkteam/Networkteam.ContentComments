@@ -3,18 +3,18 @@
     inspector:
       tabs:
         comments:
-          label: 'Comments'
+          label: Comments
           position: 50
-          icon: 'icon-comments'
+          icon: icon-comments
       groups:
         comments:
-          label: 'Comments'
-          tab: 'comments'
+          label: Comments
+          tab: comments
           position: 1000
   properties:
     comments:
-      type: 'string'
+      type: string
       ui:
         inspector:
-          group: 'comments'
+          group: comments
           editor: 'Neos.Neos.UI.NetworkteamContentComments:CommentEditor'

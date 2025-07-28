@@ -18,14 +18,14 @@ class CommentingCurrentUserDataSource extends AbstractDataSource {
 	protected $userService;
 
 	/**
-	 * Get data
-	 *
-	 * @param NodeInterface $node The node that is currently edited (optional)
-	 * @param array $arguments Additional arguments (key / value)
-	 * @return mixed JSON serializable data
-	 * @api
-	 */
-	public function getData(NodeInterface $node = NULL, array $arguments = []) {
+  * Get data
+  *
+  * @param \Neos\ContentRepository\Core\Projection\ContentGraph\Node $node The node that is currently edited (optional)
+  * @param array $arguments Additional arguments (key / value)
+  * @return mixed JSON serializable data
+  * @api
+  */
+ public function getData(\Neos\ContentRepository\Core\Projection\ContentGraph\Node $node = NULL, array $arguments = []) {
 		return array('name' => $this->userService->getBackendUser()->getName()->getFullName());
 	}
 }

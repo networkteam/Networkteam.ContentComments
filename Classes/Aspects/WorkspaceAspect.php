@@ -21,8 +21,10 @@ class WorkspaceAspect {
 	 * @return string The result of the target method if it has not been intercepted
 	 */
 	public function replaceNodeData(JoinPointInterface $joinPoint) {
-		/** @var Node $node */
-		$node = $joinPoint->getMethodArgument('sourceNode');
+		/** @var \Neos\ContentRepository\Core\Projection\ContentGraph\Node $node */
+  $node = $joinPoint->getMethodArgument('sourceNode');
+  // TODO 9.0 migration: !! Node::isRemoved() - the new CR *never* returns removed nodes; so you can simplify your code and just assume removed == FALSE in all scenarios.
+
 		if ($node->isRemoved()) {
 			// If the node is supposed to be removed, we do not need to do anything as the node will be gone anyways afterwards
 			return $joinPoint->getAdviceChain()->proceed($joinPoint);
@@ -52,12 +54,12 @@ class WorkspaceAspect {
 	}
 
 	/**
-	 * Extract comments and deserialize them
-	 *
-	 * @param NodeInterface|NodeData $nodeOrNodeData
-	 * @return array
-	 */
-	protected function extractComments($nodeOrNodeData) {
+  * Extract comments and deserialize them
+  *
+  * @param \Neos\ContentRepository\Core\Projection\ContentGraph\Node|NodeData $nodeOrNodeData
+  * @return array
+  */
+ protected function extractComments($nodeOrNodeData) {
 		if ($nodeOrNodeData->hasProperty('comments')) {
 			$comments = $nodeOrNodeData->getProperty('comments');
 			if (is_string($comments) && strlen($comments) > 0) {
@@ -95,13 +97,15 @@ class WorkspaceAspect {
 	}
 
 	/**
-	 * Write back the merged comments onto the node
-	 *
-	 * @param NodeInterface $node
-	 * @param array $mergedComments
-	 */
-	protected function writeComments(NodeInterface $node, $mergedComments) {
-		// We directly write to the NodeData instead of Node here; as the Node is not fully correct after publishing - the.
+  * Write back the merged comments onto the node
+  *
+  * @param \Neos\ContentRepository\Core\Projection\ContentGraph\Node $node
+  * @param array $mergedComments
+  */
+ protected function writeComments(\Neos\ContentRepository\Core\Projection\ContentGraph\Node $node, $mergedComments) {
+		// TODO 9.0 migration: !! Node::getNodeData() - the new CR is not based around the concept of NodeData anymore. You need to rewrite your code here.
+
+  // We directly write to the NodeData instead of Node here; as the Node is not fully correct after publishing - the.
 		// node's context is still the same as before publishing.
 		// (This is a bug in TYPO3CR which only manifests when trying to read the node after publishing in the same request)
 		// If we would write to $node directly then we would create a copy in the user's workspace; which is not what we want effectively :)
