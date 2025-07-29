@@ -1,5 +1,5 @@
 // TODO 9.0 migration: Line 74: You very likely need to rewrite "VARIABLE.label" to "Neos.Node.label(VARIABLE)". We did not auto-apply this migration because we cannot be sure whether the variable is a Node.
-// TODO 9.0 migration: Migration of Neos.Fusion:Collection to Neos.Fusion:Loop needs manual action. The key `collection` has to be renamed to `items` which cannot be done automatically
+// I think this is not relevant, so we can keep everything like it is. JP.
 # Add prototype to render comment in frontend mit bootstrap 3 based styles
 prototype(Networkteam.ContentComments:CommentRenderer) < prototype(Neos.Fusion:Value) {
     value = ${value}

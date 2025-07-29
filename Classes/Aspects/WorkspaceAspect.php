@@ -22,13 +22,7 @@ class WorkspaceAspect {
 	 */
 	public function replaceNodeData(JoinPointInterface $joinPoint) {
 		/** @var \Neos\ContentRepository\Core\Projection\ContentGraph\Node $node */
-  $node = $joinPoint->getMethodArgument('sourceNode');
-  // TODO 9.0 migration: !! Node::isRemoved() - the new CR *never* returns removed nodes; so you can simplify your code and just assume removed == FALSE in all scenarios.
-
-		if ($node->isRemoved()) {
-			// If the node is supposed to be removed, we do not need to do anything as the node will be gone anyways afterwards
-			return $joinPoint->getAdviceChain()->proceed($joinPoint);
-		}
+        $node = $joinPoint->getMethodArgument('sourceNode');
 
 		/** @var NodeData $targetNodeData */
 		$targetNodeData = $joinPoint->getMethodArgument('targetNodeData');
