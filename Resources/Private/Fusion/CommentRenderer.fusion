@@ -1,13 +1,15 @@
+// TODO 9.0 migration: Line 74: You very likely need to rewrite "VARIABLE.label" to "Neos.Node.label(VARIABLE)". We did not auto-apply this migration because we cannot be sure whether the variable is a Node.
+// I think this is not relevant, so we can keep everything like it is. JP.
 # Add prototype to render comment in frontend mit bootstrap 3 based styles
 prototype(Networkteam.ContentComments:CommentRenderer) < prototype(Neos.Fusion:Value) {
     value = ${value}
 
     input = Neos.Fusion:Tag {
-        @if.isLiveWorkspace = ${node.context.workspace.name == 'live'}
+        @if.isLiveWorkspace = ${node.workspaceName == 'live'}
         tagName = 'input'
         attributes {
             type='checkbox'
-            id = ${'c' + node.identifier}
+            id = ${'c' + node.aggregateId}
             class="content-comments__state"
         }
     }
@@ -15,31 +17,31 @@ prototype(Networkteam.ContentComments:CommentRenderer) < prototype(Neos.Fusion:V
         tagName = 'label'
         attributes {
             class = 'content-comments__trigger'
-            for = ${'c' + node.identifier}
+            for = ${'c' + node.aggregateId}
         }
         content = 'i'
     }
     comments = Neos.Fusion:Tag {
-        @if.isLiveWorkspace = ${node.context.workspace.name == 'live'}
+        @if.isLiveWorkspace = ${node.workspaceName == 'live'}
         tagName = 'div'
         attributes {
             class = 'content-comments__comments-container'
         }
-        content = Neos.Fusion:Collection {
-            collection = ${Json.parse(q(node).property('comments'))}
+        content = Neos.Fusion:Loop {
+            items = ${Json.parse(q(node).property('comments'))}
             itemRenderer = Neos.Fusion:Tag {
                 tagName = 'article'
                 attributes {
                     class="content-comments__comment-item"
                     style = ${'border-left: 3px solid ' + item.userColor}
                 }
-                content = Neos.Fusion:Array {
+                content = Neos.Fusion:Join {
                     commentHeader = Neos.Fusion:Tag {
                         tagName = 'header'
                         attributes {
                             class = "content-comments__comment-item-header"
                         }
-                        content = Neos.Fusion:Array {
+                        content = Neos.Fusion:Join {
                             date = Neos.Fusion:Tag {
                                 tagName = 'span'
                                 attributes {
